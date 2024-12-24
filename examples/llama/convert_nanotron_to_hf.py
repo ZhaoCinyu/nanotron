@@ -113,7 +113,7 @@ def convert_checkpoint_and_save(checkpoint_path: Path, save_path: Path, tokenize
     # Init huggingface model.
     with init_on_device_and_dtype(torch.device("cuda"), torch.bfloat16):
         model_config_hf = get_hf_config(model_config)
-        hf_model = LlamaForCausalLM._from_config(model_config_hf)
+        hf_model = LlamaForCausalLM._from_config(model_config_hf, attn_implementation='flash_attention_2')
 
     # Copy weights, initialize tokenizer and save model.
     if tokenizer_name is not None:

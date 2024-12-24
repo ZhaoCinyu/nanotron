@@ -43,3 +43,5 @@ def _test_get_named_modules_in_pp_rank(
         # not PipelineBlock
         assert isinstance(module, nn.Module)
         assert name not in modules_that_not_in_current_pp_rank
+
+test_get_named_modules_in_pp_rank(1,1,1)

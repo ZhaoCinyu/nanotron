@@ -15,6 +15,7 @@ from nanotron.config import (
     TensorParallelLinearMode,
     TokenizerArgs,
     TokensArgs,
+    AdamWOptimizerArgs,
 )
 from nanotron.config.config import PretrainDatasetsArgs
 from nanotron.models import build_model
@@ -69,10 +70,12 @@ def get_llama_training_config(model_config: ModelArgs):
             weight_decay=0.01,
             clip_grad=1.0,
             accumulate_grad_in_fp32=False,
-            adam_eps=1e-08,
-            adam_beta1=0.9,
-            adam_beta2=0.95,
-            torch_adam_is_fused=True,
+            optimizer_factory=AdamWOptimizerArgs(
+                adam_eps=1e-08,
+                adam_beta1=0.9,
+                adam_beta2=0.95,
+                torch_adam_is_fused=True,
+            ),
             learning_rate_scheduler=LRSchedulerArgs(
                 learning_rate=3e-4,
                 lr_warmup_steps=100,
